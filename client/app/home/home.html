@@ -1,36 +1,4 @@
-<html ng-app="blocitoffApp">
-  <head>
-    <!-- AngularJS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    <!-- Firebase -->
-    <script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
-    <!-- AngularFire -->
-    <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
-    <script src="app.js"></script>
-  </head>
 
-  <body ng-controller="HomeCtrl">
-
-    <section id="home-container"> 
-      <h1 class="main-title">BlocItOff</h1>
-    </section>
-
-    <ul>
-      <li ng-repeat="task in tasks">
-
-        <!-- edit a task -->
-        <input ng-model="task.text" ng-change="task.$save(task)" />
-
-        <!-- delete a task -->
-        <button ng-click="tasks.$remove(task)">Delete Task</button>
-
-      </li>
-    </ul>
-
-    <!-- push a new task onto the array -->
-    <form ng-submit="addTask()">
-        <input ng-model="newTaskText" />
-        <button type="submit">Add Task</button>
-    </form>
-  </body>
-</html>
+<section id="home-container"> 
+  <h1 class="main-title">BlocItOff</h1>
+</section>

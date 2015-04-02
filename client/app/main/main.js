@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('blocitoffApp')
-  .config(function ($stateProvider) {
+angular.module('blocitoffApp').config(function ($stateProvider) {
     $stateProvider
       .state('home', {
         url: '/',
