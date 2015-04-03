@@ -23,15 +23,8 @@
       <link rel="stylesheet" href="components/buttons/buttons.scss">
       <!-- endinjector -->
     <!-- endbuild -->
-    <!-- AngularJS -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script> -->
-    <!-- Firebase -->
-    <script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
-    <!-- AngularFire -->
-    <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
   </head>
-
-  <body ng-app="blocitoffApp" ng-controller="SampleCtrl">
+  <body ng-app="blocitoffApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -42,22 +35,6 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
-    
-    <!-- Firebase testing with sample messages -->
-    <ul>
-      <!-- push a new message onto the array -->
-      <form ng-submit="addMessage()">
-        <input ng-model="newMessageText" />
-        <button type="submit">Add Message</button>
-      </form>
-      <ul ng-repeat="message in messages">
-        <!-- edit a message -->
-        <input ng-model="message.text" ng-change="messages.$save(message)" />
-        <!-- delete a message -->
-        <button ng-click="messages.$remove(message)">Delete Message</button>
-      </ul>
-    </ul>
-
 
     <!-- build:js(client) app/vendor.js -->
       <!-- bower:js -->
