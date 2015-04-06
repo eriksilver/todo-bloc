@@ -7,4 +7,6 @@ angular.module('blocitoffApp').config(function ($stateProvider) {
         templateUrl: '/app/home/home.html',
         controller: 'HomeCtrl'
       });
+      alert("end of $stateProvider");
   });
+  alert("end of Main.js");
