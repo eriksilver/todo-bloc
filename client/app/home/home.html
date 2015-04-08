@@ -28,9 +28,8 @@
             </div>
         </form>
         <div class="row">
-              Div class row if needed
         </div>
-        <div hide-tasks>
+        <div toggle-check>
           <ul class="taskList"> 
                 <li class="taskItem" ng-repeat="task in tasks">
   <!--             how to test task and tasks
@@ -40,7 +39,8 @@
                 <!-- edit a task -->
                 <input ng-model="task.text" ng-change="tasks.$save(task)" />
                 <!-- mark task complete -->
-                <button class="taskComplete">Complete Task</button>
+                <input type="checkbox" ng-model="taskComplete.value" class="taskComplete">Complete Task</input>
+                <tt>debug = {{taskComplete.value}}</tt>
                 <!-- delete a task -->
                 <button ng-click="tasks.$remove(task)">Delete Task</button>
                 </li>

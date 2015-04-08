@@ -18,9 +18,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
   });
 
-console.log("appjs after module delclared");
+console.log("appjs after module declared");
 
-myApp.directive('hideTasks', function() {
+myApp.directive('toggleCheck', function() {
     console.log("start of hideTasks directive");
 
     //do logic to determine hide state
@@ -43,6 +43,5 @@ myApp.directive('hideTasks', function() {
         }
     }
 });
-
 
 
