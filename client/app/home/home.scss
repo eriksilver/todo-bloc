@@ -52,6 +52,21 @@ h1 {
   color: #777;
 }
 
+.active-history {
+
+  text-align: right;
+  font-size: 8px;
+
+  ul {
+  list-style-type: none;
+
+    li {
+      display: inline;
+      text-decoration: underline;
+    }
+  }
+}
+
 /*to do inputs*/
 .inputContainer {
   height: 60px;

@@ -4,12 +4,17 @@
   <h1 class="main-title">BlocItOff</h1>
 </section>
 
-<h3>Subtitle - testing</h3>
   <!-- task list  -->
     <div class="container">
       <div class="content">
         <h1>Current Tasks</h1>
-        <p class="tagline">self destructing todo app- TEST</p>
+        <p class="tagline">self destructing todo app</p>
+        <div class="active-history">
+          <ul>
+            <li>Active Tasks</li>
+            <li>Task History</li>
+          </ul>
+        </div>
         <!-- Add new to do -->
         <form ng-submit="addTask()">
             <div class="inputContainer">
@@ -25,18 +30,21 @@
         <div class="row">
               Div class row if needed
         </div>
-        <ul class="taskList">
-              <li class="taskItem" ng-repeat="task in tasks">
-<!--             how to test task and tasks
-              <pre>{{task}}</pre>
-              <pre>{{tasks}}</pre>  -->
+        <div hide-tasks>
+          <ul class="taskList"> 
+                <li class="taskItem" ng-repeat="task in tasks">
+  <!--             how to test task and tasks
+                <pre>{{task}}</pre>
+                <pre>{{tasks}}</pre>  -->
 
-
-              <!-- edit a task -->
-              <input ng-model="task.text" ng-change="tasks.$save(task)" />
-              <!-- delete a task -->
-              <button ng-click="tasks.$remove(task)">Delete Task</button>
-              </li>
-        </ul> <!--task list-->
-        </div> <!--content-->
+                <!-- edit a task -->
+                <input ng-model="task.text" ng-change="tasks.$save(task)" />
+                <!-- mark task complete -->
+                <button class="taskComplete">Complete Task</button>
+                <!-- delete a task -->
+                <button ng-click="tasks.$remove(task)">Delete Task</button>
+                </li>
+          </ul> 
+        </div><!--task list-->
+      </div> <!--content-->
     </div> <!--container-->
