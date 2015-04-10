@@ -30,17 +30,17 @@
         <div class="row">
         </div>
         <div toggle-check>
-          <ul class="taskList"> 
-                <li class="taskItem" ng-repeat="task in tasks">
-  <!--             how to test task and tasks
+          <ul class="taskList" > 
+                <li class="taskItem" ng-repeat="task in tasks" ng-hide="taskChecked === true">
+<!--               how to test task and tasks
                 <pre>{{task}}</pre>
                 <pre>{{tasks}}</pre>  -->
 
-                <!-- edit a task -->
+                <!-- edit a task-->
                 <input ng-model="task.text" ng-change="tasks.$save(task)" />
-                <!-- mark task complete -->
-                <input type="checkbox" ng-model="taskComplete.value" class="taskComplete">Complete Task</input>
-                <tt>debug = {{taskComplete.value}}</tt>
+                <!-- mark task complete; completed task == true; default == false -->
+                <input type="checkbox" ng-model="taskChecked" class="taskComplete" ng-click="complete()">Complete Task</input>
+                <!-- <tt>debug = {{taskComplete.value}}</tt> -->
                 <!-- delete a task -->
                 <button ng-click="tasks.$remove(task)">Delete Task</button>
                 </li>

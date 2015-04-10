@@ -21,24 +21,26 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', function($scope
     // add new items to the array
     // the task is automatically added to Firebase!
     $scope.addTask = function() {
-        $scope.tasks.$add({
-            text: $scope.newTaskText
-        });
+        var newTask = {
+            text: $scope.newTaskText,
+            status: false 
+        };
+        //console.log(newTask);
+        $scope.tasks.$add(newTask);
     };
 
-    // $scope.getAllTasks = function() {
-    //     return $firebaseArray(taskData);
-    // }
-
-
-    //if task is checked off (completed), move to taskshistory array/db
-    //taskhistory view will be shown when clicking Task History link
-    $scope.completeTask = function() {
-        if (taskComplete.value === true) {
-            //$scope.taskshistory.$add({
-
+    $scope.getAllTasks = function() {
+        return $firebaseArray(taskData);
+    }
+    
+    $scope.complete = function() {
+        if ($scope.taskChecked === true) {
+            $scope.tasks.$add({
+                status: $scope.taskChecked 
+            });
         };
     };
+
 
     console.log("home.controller.js finished");
 }]);
