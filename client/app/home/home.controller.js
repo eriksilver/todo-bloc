@@ -1,5 +1,24 @@
 app = angular.module('blocitoffApp');
 
+ app.controller('ExampleController', ['$scope', function($scope) {
+    $scope.master = {};
+
+    $scope.update = function(user) {
+      $scope.master = angular.copy(user);
+    };
+
+    $scope.reset = function(form) {
+      if (form) {
+        form.$setPristine();
+        form.$setUntouched();
+      }
+      $scope.user = angular.copy($scope.master);
+    };
+
+    $scope.reset();
+  }]);
+
+
 app.controller("SampleCtrl", function($scope, $firebaseObject, $firebaseArray) {
   var ref = new Firebase("https://dazzling-torch-1941.firebaseio.com/data");
   var itemsRef = new Firebase("https://dazzling-torch-1941.firebaseio.com/dataItems");
@@ -15,6 +34,7 @@ app.controller("SampleCtrl", function($scope, $firebaseObject, $firebaseArray) {
 
 });
 
+//tasks controller
 app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', function($scope, $http, $firebaseArray) {
     
     console.log("home.controller.js start");
@@ -33,12 +53,25 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', function($scope
     // the task is automatically added to Firebase!
     $scope.addTask = function() {
         var newTask = {
-            text: newTaskText,
+            text: $scope.newTaskText,
             status: false 
         };
         //console.log(newTask);
         $scope.tasks.$add(newTask);
+        //$scope.addTasker.$setUntouched();
     };
+
+
+
+    // When inputting form, need to clear form when submitted
+    // e.g. if form is named "addForm", you can use the setPristine() method on $scope.addForm
+    // Also need to clear model inputs with something like: $scope.currentRecord={};
+
+
+
+
+
+
 
     // $scope.getAllTasks = function() {
     //     return $firebaseArray(taskData);
