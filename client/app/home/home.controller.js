@@ -14,9 +14,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', function($scope
     $scope.tasks = $firebaseArray(taskData);
   
     
-    //test for tasks array
-    //$scope.tasks.$add({"text": "first task added"});
-
     //function reset input form
     $scope.reset = function(addForm) {
       if (addForm) {
@@ -26,27 +23,33 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', function($scope
       $scope.newTaskText = {};
     };
     
-    // add new items to the array
-    // the task is automatically added to Firebase!
+    // I have my data setup as an object; may want to refactor?
     $scope.addTask = function() {
       console.log("$scope.newTaskText:", $scope.newTaskText);
         var newTask = {
             text: $scope.newTaskText.entry,
             status: false 
         };
-        //console.log(newTask);
-
+        //add new task to Firebase
         $scope.tasks.$add(newTask);
-
-
+        //call the reset function to clear entry form
         $scope.reset();
     };
-         //console log a recall of array data
-        taskData.on("child_added", function(snapshot) {
-          var consoleTask = snapshot.val();
-          console.log("Text: " + consoleTask.text);
-          console.log("Status: " + consoleTask.status);
-        });
+
+    // $scope.complete = function() {
+    //     var completeTask = {
+    //       status:
+    //     }
+    // }
+
+
+
+     //console log a recall of array data
+    taskData.on("child_added", function(snapshot) {
+      var consoleTask = snapshot.val();
+      console.log("Text: " + consoleTask.text);
+      console.log("Status: " + consoleTask.status);
+    });
 
 
 

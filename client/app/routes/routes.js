@@ -15,7 +15,8 @@ angular.module('blocitoffApp').config(function ($stateProvider,$urlRouterProvide
 
       .state('history', {
         url: "/history",
-        templateUrl: "/app/home/history.html"
+        templateUrl: "/app/home/history.html",
+        controller: 'HomeCtrl'
       })
         // .state('route1.list', {
         //   url: "/list",

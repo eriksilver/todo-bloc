@@ -27,7 +27,7 @@
                         <!-- edit a task-->
                         <input ng-model="task.text" ng-change="tasks.$save(task)" />
                         <!-- mark task complete; completed task == true; default == false -->
-                        <input type="checkbox" ng-model="taskChecked" class="taskComplete" ng-click="complete()">Complete Task</input>
+                        <input type="checkbox" ng-model="task.status" class="taskComplete" ng-change="tasks.$save(task.status)" ng-click="checked()">Complete Task</input>
                         <!-- <tt>debug = {{taskComplete.value}}</tt> -->
                         <!-- delete a task -->
                         <button ng-click="tasks.$remove(task)">Delete Task</button>
