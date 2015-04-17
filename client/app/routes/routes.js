@@ -13,9 +13,9 @@ angular.module('blocitoffApp').config(function ($stateProvider,$urlRouterProvide
         controller: 'HomeCtrl'
       })
 
-      .state('route1', {
-        url: "/route1",
-        templateUrl: "/app/home/route1.html"
+      .state('history', {
+        url: "/history",
+        templateUrl: "/app/home/history.html"
       })
         // .state('route1.list', {
         //   url: "/list",
@@ -24,18 +24,7 @@ angular.module('blocitoffApp').config(function ($stateProvider,$urlRouterProvide
         //     $scope.items = ["A", "List", "Of", "Items"];
         //   }
           //})
-      
-      .state('route2', {
-            url: "/route2",
-            templateUrl: "/app/home/route2.html"
-      })
-        // .state('route2.list', {
-        //     url: "/list",
-        //     templateUrl: "route2.list.html",
-        //     controller: function($scope){
-        //       $scope.things = ["A", "Set", "Of", "Things"];
-        //     }
-        // })
+
   });
 
 console.log("mainjs finished");

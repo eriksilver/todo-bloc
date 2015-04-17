@@ -1,3 +1,5 @@
+//'use strict';
+
 app = angular.module('blocitoffApp');
 
 //tasks controller
