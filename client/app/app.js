@@ -12,10 +12,7 @@ var myApp = angular.module('blocitoffApp', [
   ]);
 
 myApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-    $urlRouterProvider
-      .otherwise('/');
 
-    $locationProvider.html5Mode(true);
   });
 
 console.log("appjs after module declared");
