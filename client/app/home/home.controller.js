@@ -2,6 +2,29 @@
 
 app = angular.module('blocitoffApp');
 
+
+
+app.filter('makeUppercase', function () {
+    return function (item) {
+        return item.toUpperCase();
+    };
+});
+
+app.filter('hideComplete', function () {
+    return function (taskItem) {
+        if (taskStatus === true) {
+
+        }
+        return item.toUpperCase();
+    };
+});
+
+// app.controller('PersonCtrl', function () {
+//     // this.username = 'todo made uppercase';
+// });
+
+
+
 //tasks controller
 app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', function($scope, $http, $firebaseArray) {
     
@@ -12,14 +35,20 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', function($scope
     
     // create a synchronized array
     $scope.tasks = $firebaseArray(taskData);
+    // $scope.newTask = {
+    //     text: null,
+    //     status: false
+    // };
+
+    // $scope.historyTasks = $firebaseArray(taskData).where(checked: true);
   
     
     //function reset input form
-    $scope.reset = function(addForm) {
-      if (addForm) {
-        addForm.$setPristine();
-        addForm.$setUntouched();
-      }
+    $scope.reset = function() {
+      // if (addForm) {
+      //   addForm.$setPristine();
+      //   addForm.$setUntouched();
+      // }
       $scope.newTaskText = {};
     };
     
@@ -30,17 +59,13 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', function($scope
             text: $scope.newTaskText.entry,
             status: false 
         };
+        // var newTask = $scope.newTask;
         //add new task to Firebase
         $scope.tasks.$add(newTask);
         //call the reset function to clear entry form
         $scope.reset();
     };
 
-    // $scope.complete = function() {
-    //     var completeTask = {
-    //       status:
-    //     }
-    // }
 
 
 

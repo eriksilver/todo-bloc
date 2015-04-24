@@ -1,37 +1,37 @@
+<div class="active-history">
+	<ul>
+		<li><a ui-sref="home">Active Tasks</a></li> 
+	</ul>
+</div>
 
-            <div class="active-history">
-              <ul>
-                <li><a ui-sref="home">Active Tasks</a></li> 
-              </ul>
-            </div>
-            <!-- Add new to do -->
-            <form novalidate name="addForm" ng-submit="addTask()">
-                <div class="inputContainer">
-                    <input  type="text" 
-                            id="description" 
-                            class="taskName" 
-                            placeholder="Enter your to do" 
-                            ng-model="newTaskText.entry" />
-                    <label for="description">Enter tasks here</label>
-                </div>
-            </form>
-            <div class="row">HISTORY VIEW</div> <!-- extra row -->
-                <div toggle-check> <!-- task list and ui-view -->
-                    <ul class="taskList" > 
-                        <li class="taskItem" ng-repeat="task in tasks" ng-hide="taskChecked === false">
-        <!--               how to test task and tasks
-                        <pre>{{task}}</pre>
-                        <pre>{{tasks}}</pre>  -->
+<!-- Add new to do -->
+<form novalidate name="addForm" ng-submit="addTask()">
+	<div class="inputContainer">
+		<input  type="text" 
+		id="description" 
+		class="taskName" 
+		placeholder="Enter your to do" 
+		ng-model="newTaskText.entry" />
+		<label for="description">Enter tasks here</label>
+	</div>
+</form>
 
-                        
-                        <!-- edit a task-->
-                        <input ng-model="task.text" ng-change="tasks.$save(task)" />
-                        <!-- mark task complete; completed task == true; default == false -->
-                        <input type="checkbox" ng-model="taskChecked" class="taskComplete" ng-click="complete()">Complete Task</input>
-                        <!-- <tt>debug = {{taskComplete.value}}</tt> -->
-                        <!-- delete a task -->
-                        <button ng-click="tasks.$remove(task)">Delete Task</button>
-                        </li>
-                    </ul> 
-                </div><!--task list-->
- 
+<div class="row">HISTORY VIEW</div> <!-- extra row -->
+
+<div> <!-- task list and ui-view -->
+	<ul class="taskList" > 
+		<li class="taskItem" ng-repeat="task in tasks" ng-show="task.status === true">
+
+		<!-- edit a task-->
+		<input ng-model="task.text" ng-change="tasks.$save(task)" />
+
+		<!-- mark task complete; completed task == true; default == false -->
+		<input type="checkbox" ng-model="task.status" ng-change="tasks.$save(task)" class="taskComplete">Make Active</input>
+
+		<!-- delete a task -->
+		<button ng-click="tasks.$remove(task)">Delete Task</button>
+
+		</li>
+	</ul> 
+</div><!--task list-->
+
