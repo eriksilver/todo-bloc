@@ -8,11 +8,13 @@
 <!-- Add new to do -->
 <form novalidate name="addForm" ng-submit="addTask()">
 	<div class="inputContainer">
-		<input  type="text" 
+		<input  
+		type="text" 
 		id="description" 
 		class="taskName" 
 		placeholder="Enter your to do" 
-		ng-model="newTaskText.entry" />
+		ng-model="newTask.text"
+		 />
 		<label for="description">Enter tasks here</label>
 	</div>
 </form>
@@ -25,15 +27,13 @@
 			<!--how to test task and tasks
 			<pre>{{task}}</pre>
 			<pre>{{tasks}}</pre>  -->
-			<td>{{task.text | makeUppercase}}</td>  
+			<!-- <td>{{task.text | makeUppercase}}</td>   -->
 
 			<!-- edit a task-->
 			<input ng-model="task.text" ng-change="tasks.$save(task)" />
 
 			<!-- mark task complete; completed task == true; default == false -->
 			<input type="checkbox" ng-model="task.status" class="taskComplete" ng-change="tasks.$save(task)">Complete Task</input>
-
-			<!-- <tt>debug = {{taskComplete.value}}</tt> -->
 
 			<!-- delete a task -->
 			<button ng-click="tasks.$remove(task)">Delete Task</button>

@@ -26,19 +26,29 @@ app.filter('hideComplete', function () {
 
 
 //tasks controller
-app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', function($scope, $http, $firebaseArray) {
+app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', function($scope, $http, $firebaseArray, $timeout) {
     
     console.log("home.controller.js start");
     
+
+    //EXAMPLE using the timeout service
+    //Notice the function passed to the $timeout service. This function calls the callAtTimeout() function on the $scope object.
+    $scope.callAtTimeout = function() {
+        console.log("$scope.callAtTimeout - Timeout occurred");
+    }
+
+    $timeout( function(){ $scope.callAtTimeout(); }, 3000);
+    /////
+
     //database for current task Data
     var taskData = new Firebase("https://dazzling-torch-1941.firebaseio.com/tasks");
     
     // create a synchronized array
     $scope.tasks = $firebaseArray(taskData);
-    // $scope.newTask = {
-    //     text: null,
-    //     status: false
-    // };
+    $scope.newTask = {
+        text: null,
+        status: false
+    };
 
     // $scope.historyTasks = $firebaseArray(taskData).where(checked: true);
   
@@ -49,19 +59,24 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', function($scope
       //   addForm.$setPristine();
       //   addForm.$setUntouched();
       // }
-      $scope.newTaskText = {};
+      $scope.newTask = {};
     };
     
     // I have my data setup as an object; may want to refactor?
     $scope.addTask = function() {
-      console.log("$scope.newTaskText:", $scope.newTaskText);
-        var newTask = {
-            text: $scope.newTaskText.entry,
-            status: false 
-        };
-        // var newTask = $scope.newTask;
+      console.log("$scope.newTask.text", $scope.newTask);
+      	// var addToArray = $scope.newTask.text
+        
         //add new task to Firebase
-        $scope.tasks.$add(newTask);
+        $scope.tasks.$add($scope.newTask['text']);
+
+        ///Using $timeout for tasks
+    	$scope.expireTaskAtTimeout = function() {
+ 			$scope.newTask.status = true;
+    	}
+
+    	$timeout( function(){ $scope.expireTaskAtTimeout(); }, 3000);
+
         //call the reset function to clear entry form
         $scope.reset();
     };
