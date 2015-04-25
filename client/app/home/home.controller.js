@@ -53,6 +53,17 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
     // $scope.historyTasks = $firebaseArray(taskData).where(checked: true);
   
     
+    ///Using $timeout for tasks
+    $scope.expireTaskAtTimeout = function() {
+        // $scope.newTask.status = true;
+        // $scope.task.status = true;
+        $scope.newTask['status'] = true;
+
+        console.log("runnning inside task time out function");
+    
+    };
+
+
     //function reset input form
     $scope.reset = function() {
       // if (addForm) {
@@ -65,24 +76,27 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
     // I have my data setup as an object; may want to refactor?
     $scope.addTask = function() {
       console.log("$scope.newTask.text", $scope.newTask);
-      	// var addToArray = $scope.newTask.text
-        
+
         //add new task to Firebase
-        $scope.tasks.$add($scope.newTask['text']);
+        $scope.tasks.$add($scope.newTask);
 
-        ///Using $timeout for tasks
-    	$scope.expireTaskAtTimeout = function() {
- 			$scope.newTask.status = true;
-    	}
+        // $timeout(function() {$scope.newTask.status = true;}, 3000);
+        $timeout(function(){ $scope.expireTaskAtTimeout(); }, 3000);
 
-    	$timeout( function(){ $scope.expireTaskAtTimeout(); }, 3000);
 
         //call the reset function to clear entry form
         $scope.reset();
+
+        //call timer function
+        // $scope.expireTaskAtTimeout();
+        // $timeout(console.log("running timer"), 3000);
+        // $timeout( function(){ $scope.expireTaskAtTimeout(); }, 3000);
+        // $scope.task.status = true;
+
+
+
+
     };
-
-
-
 
      //console log a recall of array data
     taskData.on("child_added", function(snapshot) {
