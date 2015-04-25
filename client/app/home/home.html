@@ -31,12 +31,17 @@
 
 			<!-- edit a task-->
 			<input ng-model="task.text" ng-change="tasks.$save(task)" />
+			<select name="Priority" ng-model="task.priority" ng-change="tasks.$save(task)">
+				<option value="low">Low</option>
+  				<option value="medium">Medium</option>
+  				<option value="high">High</option>
+			</select>
 
 			<!-- mark task complete; completed task == true; default == false -->
-			<input type="checkbox" ng-model="task.status" class="taskComplete" ng-change="tasks.$save(task)">Complete Task</input>
+			<input type="checkbox" ng-model="task.status" class="taskComplete" ng-change="tasks.$save(task)">Complete</input>
 
 			<!-- delete a task -->
-			<button ng-click="tasks.$remove(task)">Delete Task</button>
+			<button ng-click="tasks.$remove(task)">Delete</button>
 
 		</li>
 	</ul> 

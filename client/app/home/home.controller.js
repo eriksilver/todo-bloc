@@ -47,7 +47,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
     $scope.tasks = $firebaseArray(taskData);
     $scope.newTask = {
         text: null,
-        status: false
+        status: false,
+        priority: 'medium'
     };
 
     // $scope.historyTasks = $firebaseArray(taskData).where(checked: true);
@@ -103,6 +104,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
       var consoleTask = snapshot.val();
       console.log("Text: " + consoleTask.text);
       console.log("Status: " + consoleTask.status);
+      console.log("priority: " + consoleTask.priority);
     });
 
 
