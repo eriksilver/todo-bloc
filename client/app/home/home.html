@@ -23,7 +23,7 @@
 
 <div > <!-- task list and ui-view -->
 	<ul class="taskList" > 
-		<li class="taskItem" ng-repeat="task in tasks" ng-hide="task.status === true">
+		<li class="taskItem" ng-repeat="task in tasks | orderBy: 'id' " ng-hide="task.status === true">
 			<!--how to test task and tasks
 			<pre>{{task}}</pre>
 			<pre>{{tasks}}</pre>  -->
@@ -32,9 +32,9 @@
 			<!-- edit a task-->
 			<input ng-model="task.text" ng-change="tasks.$save(task)" />
 			<select name="Priority" ng-model="task.priority" ng-change="tasks.$save(task)">
-				<option value="low">Low</option>
-  				<option value="medium">Medium</option>
-  				<option value="high">High</option>
+				<option id=3 value="low">Low</option>
+  				<option id=2 value="medium">Medium</option>
+  				<option id=1 value="high">High</option>
 			</select>
 
 			<!-- mark task complete; completed task == true; default == false -->
