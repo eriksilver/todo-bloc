@@ -2,43 +2,13 @@
 
 app = angular.module('blocitoffApp');
 
-
-
-app.filter('makeUppercase', function () {
-    return function (item) {
-        return item.toUpperCase();
-    };
-});
-
-app.filter('hideComplete', function () {
-    return function (taskItem) {
-        if (taskStatus === true) {
-
-        }
-        return item.toUpperCase();
-    };
-});
-
-// app.controller('PersonCtrl', function () {
-//     // this.username = 'todo made uppercase';
-// });
-
-
-
 //tasks controller
 app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', function($scope, $http, $firebaseArray, $timeout) {
     
     console.log("home.controller.js start");
     
 
-    //EXAMPLE using the timeout service
-    //Notice the function passed to the $timeout service. This function calls the callAtTimeout() function on the $scope object.
-    $scope.callAtTimeout = function() {
-        console.log("$scope.callAtTimeout - Timeout occurred");
-    }
 
-    $timeout( function(){ $scope.callAtTimeout(); }, 3000);
-    /////
 
     //database for current task Data
     var taskData = new Firebase("https://dazzling-torch-1941.firebaseio.com/tasks");
@@ -53,14 +23,25 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
 
     // $scope.historyTasks = $firebaseArray(taskData).where(checked: true);
   
+
+    //EXAMPLE using the timeout service
+    //Notice the function passed to the $timeout service. This function calls the callAtTimeout() function on the $scope object.
+    $scope.callAtTimeout = function() {
+        console.log("$scope.callAtTimeout - Timeout occurred");
+    }
+
+    $timeout( function(){ $scope.callAtTimeout(); }, 3000);
+    /////
+
     
     ///Using $timeout for tasks
     $scope.expireTaskAtTimeout = function() {
         // $scope.newTask.status = true;
         // $scope.task.status = true;
-        $scope.newTask['status'] = true;
+        //$scope.newTask['status'] = true;
+        ////How do I update task status to be true?
 
-        console.log("runnning inside task time out function");
+        console.log("runnning inside expireTaskAtTimeout function");
     
     };
 
