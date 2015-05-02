@@ -12,6 +12,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
     
     // create a synchronized array
     $scope.tasks = $firebaseArray(taskData);
+    // define task properties
     $scope.newTask = {
         text: null,
         status: false,
@@ -19,30 +20,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
         createdAt: null,
         expiresAt: null // This is set in $scope.addTask
     };
-
-    // $scope.historyTasks = $firebaseArray(taskData).where(checked: true);
-  
-
-    //EXAMPLE using the timeout service
-    //Notice the function passed to the $timeout service. This function calls the callAtTimeout() function on the $scope object.
-    $scope.callAtTimeout = function() {
-        console.log("$scope.callAtTimeout - Timeout occurred");
-    }
-
-    $timeout( function(){ $scope.callAtTimeout(); }, 3000);
-    /////
-    
-    ///Using $timeout for tasks
-    $scope.expireTaskAtTimeout = function() {
-        // $scope.newTask.status = true;
-        // $scope.task.status = true;
-        //$scope.newTask['status'] = true;
-        ////How do I update task status to be true?
-
-        console.log("runnning inside expireTaskAtTimeout function");
-
-    };
-
 
     //function reset input form
     $scope.reset = function() {
@@ -52,49 +29,39 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
       // }
       $scope.newTask = {};
     };
-
-    // $scope.checkTaskStatus = function(task) {
-    //     $scope.updateExipirtationStatus();
-    //     return task.status == true && task.expiresAt - now() > 0 && false
-    // };
-
-    // $scope.updateExipirtationStatus = function() {
-    //     var isExipred = task.expiresAt - now() > 0;
-
-    //     if (isExipred) {
-    //         task.isExpired = true;
-    //     } else {
-    //         // nothing to do here
-    //     }
-
-    // };
     
-    // I have my data setup as an object; may want to refactor?
+    // addTask function called when new task is entered
     $scope.addTask = function() {
       console.log("$scope.newTask.text", $scope.newTask);
 
         //add new task to Firebase
         var newTask = $scope.newTask;
+        
+        //Set task timer as expiration date
         // newTask.createdAt = ;
-        // newTask.expiresAt = ;
+        newTask.expiresAt = Date.now() + 3000;
+        console.log("date now stamp", newTask.expiresAt);
+        //console.log("true or fales", 8 - 9 < 0);
+
         $scope.tasks.$add($scope.newTask);
-
-        // $timeout(function() {$scope.newTask.status = true;}, 3000);
-        $timeout(function(){ $scope.expireTaskAtTimeout(); }, 3000);
-
 
         //call the reset function to clear entry form
         $scope.reset();
 
-        //call timer function
-        // $scope.expireTaskAtTimeout();
-        // $timeout(console.log("running timer"), 3000);
-        // $timeout( function(){ $scope.expireTaskAtTimeout(); }, 3000);
-        // $scope.task.status = true;
+    };
 
+    // $scope.checkTaskExpired = function(task) {
+    //     $scope.updateExpiredStatus();
+    //     return task.status == true && task.expiresAt - Date.now() > 0 && false
+    // };
 
+    $scope.updateExpiredStatus = function(task) {
+        var isExpired = task.expiresAt - Date.now() < 0;
+        console.log("var isExpired", isExpired );
 
-
+        if (isExpired) {
+            $scope.task.isExpired = true;
+        }
     };
 
      //console log a recall of array data
