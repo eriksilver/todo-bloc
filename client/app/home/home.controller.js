@@ -2,34 +2,29 @@
 
 app = angular.module('blocitoffApp');
 
-
-
-app.filter('makeUppercase', function () {
-    return function (item) {
-        return item.toUpperCase();
-    };
-});
-
-app.filter('hideComplete', function () {
-    return function (taskItem) {
-        if (taskStatus === true) {
-
-        }
-        return item.toUpperCase();
-    };
-});
-
-// app.controller('PersonCtrl', function () {
-//     // this.username = 'todo made uppercase';
-// });
-
-
-
 //tasks controller
 app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', function($scope, $http, $firebaseArray, $timeout) {
     
     console.log("home.controller.js start");
     
+
+
+
+    //database for current task Data
+    var taskData = new Firebase("https://dazzling-torch-1941.firebaseio.com/tasks");
+    
+    // create a synchronized array
+    $scope.tasks = $firebaseArray(taskData);
+    $scope.newTask = {
+        text: null,
+        status: false,
+        priority: 'medium',
+        createdAt: null,
+        expiresAt: null // This is set in $scope.addTask
+    };
+
+    // $scope.historyTasks = $firebaseArray(taskData).where(checked: true);
+  
 
     //EXAMPLE using the timeout service
     //Notice the function passed to the $timeout service. This function calls the callAtTimeout() function on the $scope object.
@@ -39,28 +34,15 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
 
     $timeout( function(){ $scope.callAtTimeout(); }, 3000);
     /////
-
-    //database for current task Data
-    var taskData = new Firebase("https://dazzling-torch-1941.firebaseio.com/tasks");
-    
-    // create a synchronized array
-    $scope.tasks = $firebaseArray(taskData);
-    $scope.newTask = {
-        text: null,
-        status: false
-    };
-
-    // $scope.historyTasks = $firebaseArray(taskData).where(checked: true);
-  
     
     ///Using $timeout for tasks
     $scope.expireTaskAtTimeout = function() {
         // $scope.newTask.status = true;
         // $scope.task.status = true;
-        $scope.newTask['status'] = true;
+        //$scope.newTask['status'] = true;
+        ////How do I update task status to be true?
 
-        console.log("runnning inside task time out function");
-    
+        console.log("runnning inside expireTaskAtTimeout function");
     };
 
 
@@ -72,12 +54,31 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
       // }
       $scope.newTask = {};
     };
+
+    // $scope.checkTaskStatus = function(task) {
+    //     $scope.updateExipirtationStatus();
+    //     return task.status == true && task.expiresAt - now() > 0 && false
+    // };
+
+    // $scope.updateExipirtationStatus = function() {
+    //     var isExipred = task.expiresAt - now() > 0;
+
+    //     if (isExipred) {
+    //         task.isExpired = true;
+    //     } else {
+    //         // nothing to do here
+    //     }
+
+    // };
     
     // I have my data setup as an object; may want to refactor?
     $scope.addTask = function() {
       console.log("$scope.newTask.text", $scope.newTask);
 
         //add new task to Firebase
+        var newTask = $scope.newTask;
+        // newTask.createdAt = ;
+        // newTask.expiresAt = ;
         $scope.tasks.$add($scope.newTask);
 
         // $timeout(function() {$scope.newTask.status = true;}, 3000);
@@ -103,6 +104,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
       var consoleTask = snapshot.val();
       console.log("Text: " + consoleTask.text);
       console.log("Status: " + consoleTask.status);
+      console.log("priority: " + consoleTask.priority);
     });
 
 
