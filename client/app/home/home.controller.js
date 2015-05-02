@@ -7,7 +7,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
     
     console.log("home.controller.js start");
     
-
     //database for current task Data
     var taskData = new Firebase("https://dazzling-torch-1941.firebaseio.com/tasks");
     
@@ -41,6 +40,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
         ////How do I update task status to be true?
 
         console.log("runnning inside expireTaskAtTimeout function");
+
     };
 
 
