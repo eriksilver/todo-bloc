@@ -23,7 +23,7 @@
 
 <div > <!-- task list and ui-view -->
 	<ul class="taskList" > 
-		<li class="taskItem" ng-repeat="task in tasks | orderBy: 'id' " ng-hide="task.status === true || task.isExpired === true">
+		<li class="taskItem" ng-repeat="task in tasks" ng-hide="task.status === true || task.isExpired === true">
 			<!--how to test task and tasks
 			<pre>{{task}}</pre>
 			<pre>{{tasks}}</pre>  -->

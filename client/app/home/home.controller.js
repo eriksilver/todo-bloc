@@ -9,7 +9,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
     
     //database for current task Data
     var taskData = new Firebase("https://dazzling-torch-1941.firebaseio.com/tasks");
-    
+
+
     // create a synchronized array
     $scope.tasks = $firebaseArray(taskData);
     // define task properties
@@ -32,21 +33,24 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
     
     // addTask function called when new task is entered
     $scope.addTask = function() {
-      console.log("$scope.newTask.text", $scope.newTask);
+      console.log("$scope.newTask:", $scope.newTask);
 
         //add new task to Firebase
         var newTask = $scope.newTask;
         
         //Set task timer as expiration date
         // newTask.createdAt = ;
-        newTask.expiresAt = Date.now() + 3000;
-        console.log("date now stamp", newTask.expiresAt);
-        //console.log("true or fales", 8 - 9 < 0);
+        $scope.newTask.expiresAt = Date.now() + 3000;
+        console.log("expiresAt stamp:", newTask.expiresAt);
+        //console.log("true or false", 8 - 9 < 0);
 
+        //add newTask object to Firebase array using Firebase $add method
         $scope.tasks.$add($scope.newTask);
 
         //call the reset function to clear entry form
         $scope.reset();
+
+        console.log("$scope.tasks.expiresAt:", $scope.tasks.expiresAt);
 
     };
 
@@ -55,14 +59,29 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
     //     return task.status == true && task.expiresAt - Date.now() > 0 && false
     // };
 
-    $scope.updateExpiredStatus = function(task) {
-        var isExpired = task.expiresAt - Date.now() < 0;
-        console.log("var isExpired", isExpired );
+    $scope.updateExpiredStatus = function() {
+        console.log("running updateExpiredStatus function");
+        //var isExpired = $scope.task.expiresAt - Date.now() < 0;
+        // console.log("var isExpired:", isExpired );
 
-        if (isExpired) {
-            $scope.task.isExpired = true;
-        }
+        // if (isExpired) {
+        //     $scope.task.isExpired = true;
+        // }
     };
+
+   $scope.updateExpiredStatus();
+
+	// // Given a DataSnapshot containing a child "fred" and a child "wilma", this callback
+	// // function will be called twice
+	// taskData.forEach(function(childSnapshot) {
+	//   // key will be "fred" the first time and "wilma" the second time
+	//   var key = childSnapshot.key();
+	//   console.log("key:");
+	//   // childData will be the actual contents of the child
+	//   var childData = childSnapshot.val();
+	//   console.log("childData:");
+	// });
+
 
      //console log a recall of array data
     taskData.on("child_added", function(snapshot) {
@@ -70,7 +89,23 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
       console.log("Text: " + consoleTask.text);
       console.log("Status: " + consoleTask.status);
       console.log("priority: " + consoleTask.priority);
+      console.log("createdAt: " + consoleTask.createdAt);
+      console.log("expiresAt: " + consoleTask.expiresAt);
+      console.log("-----------")
+      console.dir(consoleTask);
     });
+
+    //setup variables to extract data from Firebase
+    var taskObjects;
+    taskData.once('value', function(dataSnapshot) {
+  		// store dataSnapshot for use in below examples.
+  		taskObjects = dataSnapshot;
+	});
+
+	//var savedData = taskObjects.val();
+	//console.dir(savedData);
+
+
 
 
 
