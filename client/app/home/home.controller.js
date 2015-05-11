@@ -13,6 +13,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
 
     // create a synchronized array
     $scope.tasks = $firebaseArray(taskData);
+
     // define task properties
     $scope.newTask = {
         text: null,
@@ -51,7 +52,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
         $scope.reset();
 
         console.log("$scope.tasks.expiresAt:", $scope.tasks.expiresAt);
-
     };
 
     // $scope.checkTaskExpired = function(task) {
@@ -95,36 +95,49 @@ app.controller('HomeCtrl', ['$scope', '$http', '$firebaseArray', '$timeout', fun
       console.dir(consoleTask);
     });
 
+    //Expired task manager function
+    //Write a function that takes in objects
+
+    //One function that reviews all tasks
+    //need to adapt to iterate over Firebase array
+    var manageExpiredTasks = function(tasks) {
+      console.log("manage tasks running",tasks.length);
+      for (var i = 0; i < tasks.length; i++) {
+        tasks[i];
+        console.log("Here is tasks[i]:", tasks[i]);
+        console.log("Here is tasks[i].expiresAt:",tasks[i].expiresAt);
+        isTaskExpired();
+      };
+    };
+
+    manageExpiredTasks($scope.tasks);
+
+    //One function to determine if task is expired or not
+    var isTaskExpired = function(task) {
+      if (task.expiresAt - Date.now() > 0) {
+        return false //task is NOT expired
+      } 
+      else {
+        return true //task is expired
+      }
+    };
+
     //setup variables to extract data from Firebase
+    //"once" is like a watch method that only acts on an update of a value
     var taskObjects;
     taskData.once('value', function(dataSnapshot) {
+      console.log("dataSnapshot function");
   		// store dataSnapshot for use in below examples.
   		taskObjects = dataSnapshot;
+
+      var savedData = taskObjects.val();
+      console.dir(savedData);
 	});
 
-	//var savedData = taskObjects.val();
-	//console.dir(savedData);
-
-
-
-
-
-
-    // When inputting form, need to clear form when submitted
-    // e.g. if form is named "addForm", you can use the setPristine() method on $scope.addForm
-    // Also need to clear model inputs with something like: $scope.currentRecord={};
-
-    // $scope.getAllTasks = function() {
-    //     return $firebaseArray(taskData);
-    // }
+    // using ng init
+    // call ng-init in list items; every time items listed, call checkTaskExpired
+    // checkTaskExpired uses getRecord and id and checks each list items
     
-    // complete = function() {
-    //     if ($scope.taskChecked === true) {
-    //         $scope.tasks.$add({
-    //             status: $scope.taskChecked 
-    //         });
-    //     };
-    // };
 
 
     console.log("home.controller.js finished");
