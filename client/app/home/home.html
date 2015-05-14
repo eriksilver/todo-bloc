@@ -1,7 +1,7 @@
 
 <div class="active-history">
 	<ul>
-		<li><a ui-sref="history">Task History</a></li>
+		<li><a ui-sref="history">Completed Tasks</a></li>
 	</ul>
 </div>
 
@@ -14,6 +14,7 @@
 		class="taskName" 
 		placeholder="Enter your to do" 
 		ng-model="newTask.text"
+		
 		 />
 		<label for="description">Enter tasks here</label>
 	</div>
@@ -27,7 +28,6 @@
 			<!--how to test task and tasks
 			<pre>{{task}}</pre>
 			<pre>{{tasks}}</pre>  -->
-			<!-- <td>{{task.text | makeUppercase}}</td>   -->
 
 			<!-- edit a task-->
 			<input ng-model="task.text" ng-change="tasks.$save(task)" />
