@@ -1,4 +1,12 @@
-## Blocitoff Seed Application
+## Running the App
+* Need to first run command 'mongod' //this will run in the background
+* Command 'grunt serve' will run and launch App in browser
+* App will run locally on localhost:9000
+* WIP - Running on Heroku
+   * Command 'heroku open' will launch app in browser
+      * Still getting error messages on this
+
+## Built with the Blocitoff Seed Application
 
 This application is meant to be a pre-packaged backend for the Blocitoff Frontend Project.
 
