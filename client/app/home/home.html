@@ -8,13 +8,13 @@
 <!-- Add new to do -->
 <form novalidate ng-submit="addTask()">
 	<div class="inputContainer">
-		<input  
-		type="text" 
-		id="description" 
-		class="taskName" 
-		placeholder="Enter your to do" 
+		<input
+		type="text"
+		id="description"
+		class="taskName"
+		placeholder="Enter your to do"
 		ng-model="newTask.text"
-		
+
 		 />
 		<label for="description">Enter tasks here</label>
 	</div>
@@ -23,7 +23,7 @@
 <div class="row"></div> <!-- extra row -->
 
 <div > <!-- task list and ui-view -->
-	<ul class="taskList"> 
+	<ul class="taskList">
 		<li class="taskItem" ng-repeat="task in tasks" ng-init="checkTaskExpiration(task.$id)" ng-hide="task.status === true">
 			<!--how to test task and tasks
 			<pre>{{task}}</pre>
@@ -44,6 +44,5 @@
 			<button ng-click="tasks.$remove(task)">Delete</button>
 
 		</li>
-	</ul> 
+	</ul>
 </div><!--task list-->
-

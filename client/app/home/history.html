@@ -1,13 +1,13 @@
 <div class="active-history">
 	<ul>
-		<li><a ui-sref="home">Active Tasks</a></li> 
+		<li><a ui-sref="home">Active Tasks</a></li>
 	</ul>
 </div>
 
 <div class="row">COMPLETED TASKS</div> <!-- extra row -->
 
 <div> <!-- task list and ui-view -->
-	<ul class="taskList" > 
+	<ul class="taskList" >
 		<li class="taskItem" ng-repeat="task in tasks" ng-show="task.status === true">
 
 		<!-- edit a task-->
@@ -20,6 +20,5 @@
 		<button ng-click="tasks.$remove(task)">Delete Task</button>
 
 		</li>
-	</ul> 
+	</ul>
 </div><!--task list-->
-

@@ -15,7 +15,7 @@ app.controller('HomeCtrl', [
   '$timeout',
   '$log',
   function($scope, $http, $firebaseArray, $timeout, $log) {
-        
+
     //database for current task Data
     var taskData = new Firebase("https://dazzling-torch-1941.firebaseio.com/tasks");
 
@@ -36,12 +36,12 @@ app.controller('HomeCtrl', [
     $scope.reset = function() {
       $scope.newTask = angular.copy($scope.newTaskDefaults);
     };
-    
+
     // addTask function called when new task is entered
     $scope.addTask = function() {
       $log.debug("addTask Called - result - $scope.newTask:", $scope.newTask);
-        
-        //Set task expiration with current time 
+
+        //Set task expiration with current time
         //Timer is set with (Date.now()) + milliseconds or days
         var days = 24 * 60 * 60 * 1000 //hours mins secs millisecs
         $scope.newTask.expiresAt = Date.now() + days;
@@ -70,5 +70,3 @@ app.controller('HomeCtrl', [
       //console.log('finished checkTaskExpiration');
     };
 }]);
-
-

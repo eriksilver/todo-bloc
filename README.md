@@ -1,3 +1,7 @@
+##This repo is deprecated
+* Find new ToDo App repo [here](https://github.com/eriksilver/todo_app)
+* This repo will be kept for the history of the todo app files
+ 
 ## Running the App
 * Need to first run command 'mongod' //this will run in the background
 * Command 'grunt serve' will run and launch App in browser
